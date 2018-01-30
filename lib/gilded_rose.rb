@@ -8,7 +8,7 @@ class GildedRose
     @items.each do |item|
       # handles logic for if the item degrades in quality 'normally', i.e. by 1
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" # and item.name != 'Sulfurus' --- group these conditons!!!
-        # no items quality can ever be below 0 - extract this conditon!!!
+        # no items quality can ever be below 0 - extract this conditon!!! Sulfuras is always over 0
         if item.quality > 0
           # sulfurus never decreases in quality
           if item.name != "Sulfuras, Hand of Ragnaros"
