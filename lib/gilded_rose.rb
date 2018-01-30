@@ -6,8 +6,11 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
+      # handles logic for if the item degrades in quality 'normally', i.e. by 1
+      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" # and item.name != 'Sulfurus' --- group these conditons!!!
+        # no items quality can ever be below 0 - extract this conditon!!!
         if item.quality > 0
+          # sulfurus never decreases in quality
           if item.name != "Sulfuras, Hand of Ragnaros"
             item.quality = item.quality - 1
           end
