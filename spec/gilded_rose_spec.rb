@@ -10,7 +10,7 @@ describe GildedRose do
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq(0)
       end
-      it "should decrease the sell-in by one" do
+      it "should decrease the sell-in date by one" do
         items = [Item.new("foo", 5, 10)]
         GildedRose.new(items).update_quality()
         expect(items[0].sell_in).to eq(4)
@@ -24,6 +24,11 @@ describe GildedRose do
         items = [Item.new("foo", -1, 10)]
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq(8)
+      end
+      it "quality should decrease twice as fast for sell-in date < 0 days but not below 0 quality" do
+        items = [Item.new("foo", -1, 1)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq(0)
       end
     end
 
@@ -68,6 +73,11 @@ describe GildedRose do
       end
       it "should not allow quality over 50 for sellin <=5 days" do
         items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 48)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq(50)
+      end
+      it "should not allow quality over 50 for sellin <=5 days" do
+        items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 5, 49)]
         GildedRose.new(items).update_quality()
         expect(items[0].quality).to eq(50)
       end
